@@ -1,0 +1,58 @@
+------Install Preparartions-----------------------------------------
+sudo apt-get update
+apt install docker.io
+
+apt-get install git-core
+
+git clone https://gitee.com/jorgensen/2048.git
+
+cd 2048
+
+vim Dockerfile
+docker build -t 2048 .
+
+docker images
+
+docker run -p 8080:80 2048
+
+------Subir la imagen a SWR----------------------------------------
+
+docker login -u la-north-2@R668V00BXMBST04PKYAB -p 37d341b7c38335e75f76f6aec4bd84fbe8af54c89ca3ce842c75652d7d76cbe6 swr.la-north-2.myhuaweicloud.com
+
+docker tag 2048:latest swr.la-north-2.myhuaweicloud.com/testsa/2048:v1
+docker push swr.la-north-2.myhuaweicloud.com/testsa/2048:v1
+
+------Creating a docker file---------------------------------------
+
+mkdir mynginx
+
+cd mynginx
+
+touch Dockerfile
+
+vim Dockerfile
+
+FROM nginx
+RUN echo '<h1>Hello, SWR!</h1>' > /usr/share/nginx/html/index.html
+
+docker build -t nginx:v1 .
+
+docker run -p 8090:80 nginx:v1
+
+------Subir la imagen a SWR----------------------------------------
+
+docker login -u la-north-2@R668V00BXMBST04PKYAB -p 37d341b7c38335e75f76f6aec4bd84fbe8af54c89ca3ce842c75652d7d76cbe6 swr.la-north-2.myhuaweicloud.com
+docker images
+docker tag nginx:latest swr.la-north-2.myhuaweicloud.com/testsa/nginx:v1
+docker push swr.la-north-2.myhuaweicloud.com/testsa/nginx:v1
+
+
+
+$ sudo docker tag [{Image Name}:{Tag name}] swr.sa-brazil-1.myhuaweicloud.com/{Organization Name}/{Image Name}:{Tag name}
+
+$ sudo docker push swr.sa-brazil-1.myhuaweicloud.com/{Organization Name}/{Image Name}:{Tag name}
+
+----------------
+
+
+git clone https://github.com/Maclinz/JS_CSS_PortfolioProject
